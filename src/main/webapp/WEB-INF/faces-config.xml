@@ -1,0 +1,10 @@
+<faces-config version="2.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>
