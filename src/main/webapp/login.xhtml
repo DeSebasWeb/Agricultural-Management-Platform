@@ -6,26 +6,51 @@
     <h:head>
         <title>AgroMercado</title>
         <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
-        <h:outputStylesheet library="css" name="login.css"/>
         <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon"/>
+        <h:outputStylesheet name="css/login.css"/>
+
+
     </h:head>
 
-    <h:body>
+    <h:body styleClass="bg-image">
         <div class="card">
             <h:form>
                 <p:growl id="mensajes" showDetails="true"/>
                 <!-- MenuBar -->
-                <p:menubar hideDelay="1000" styleClass="flex ">
+                <p:menubar hideDelay="1000" styleClass="flex">
                     <f:facet name="start">
-                        <h:outputText value="AgroMercado" styleClass="text-lg flex align-items-center h-full px-3"/>
+                        <h:outputText value="AgroMercado" styleClass="text-lg flex align-items-center h-full px-3 texto"/>
                     </f:facet>
                     <!--  < class="flex align-items-center justify-content-center ">-->
                     <p:menuitem 
-                        value="Iniciar sesion" icon="pi pi-users"/>
+                            value="Iniciar sesion" icon="pi pi-users"/>
                     <p:menuitem class="align-items-center"
-                        value="Registrarse" icon="pi pi-user-plus"/>
+                            value="Registrarse" icon="pi pi-user-plus"/>
+                   
                 </p:menubar>
             </h:form>
+        </div>
+        <div styleClass="flex justify-content-center align-items-center min-h-screen panel-tranparente">
+            <p:card styleClass="w-6 shadow-4 p-4">
+            <h:form>
+                <h3 class="text-center">Registro</h3>
+                <div class="field">
+                    <p:outputLabel for="nombre" value="Nombre"/>
+                    <p:inputText id="nombre" type="text" styleClass="w-full"/>
+                </div>
+                <div class="field">
+                    <p:outputLabel for="apellido" value="Apellido"/>
+                    <p:inputText id="apellido" type="text" styleClass="w-full"/>
+                </div>
+                <div class="field">
+                    <p:outputLabel for="nombre-usuario" value="Username"/>
+                    <p:inputText id="nombre-usuario" type="text" styleClass="w-full"/>
+                </div>
+                <div class="text-center mt-3">
+                    <p:commandButton value="Registrar" styleClass="p-button-success"/>
+                </div>
+            </h:form>
+        </p:card>
         </div>
     </h:body>
 </html>
