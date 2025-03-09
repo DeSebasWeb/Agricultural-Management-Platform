@@ -1,11 +1,13 @@
 package sebastian.lopez.agriculturalManagementPlatform.servicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sebastian.lopez.agriculturalManagementPlatform.modelo.Usuario;
 import sebastian.lopez.agriculturalManagementPlatform.repositorio.UsuarioRepositorio;
 
 import java.util.List;
 
+@Service
 public class UsuarioServivio implements IUsuarioServicio{
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
