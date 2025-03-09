@@ -7,7 +7,7 @@
         <title>AgroMercado</title>
         <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
         <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon"/>
-        <h:outputStylesheet name="css/login.css"/>
+        <h:outputStylesheet name="css/login.css?version=2"/>
 
 
     </h:head>
@@ -17,40 +17,90 @@
             <h:form>
                 <p:growl id="mensajes" showDetails="true"/>
                 <!-- MenuBar -->
-                <p:menubar hideDelay="1000" styleClass="flex">
+                <p:menubar hideDelay="1000" >
                     <f:facet name="start">
-                        <h:outputText value="AgroMercado" styleClass="text-lg flex align-items-center h-full px-3 texto"/>
+                        <p:graphicImage name="images/logo_transparente"/>
+                        <h:outputText value="AgroMercado" styleClass="text-lg flex align-items-center h-full px-3 menu-title"/>
                     </f:facet>
+                    
                     <!--  < class="flex align-items-center justify-content-center ">-->
-                    <p:menuitem 
-                            value="Iniciar sesion" icon="pi pi-users"/>
-                    <p:menuitem class="align-items-center"
-                            value="Registrarse" icon="pi pi-user-plus"/>
-                   
+                    <f:facet name="end">
+                        <p:button value="Iniciar sesion" icon="pi pi-sign-in" styleClass="ui-button-raised ui-button-secondary buttons-menu"/>
+                    </f:facet>
                 </p:menubar>
             </h:form>
         </div>
-        <div styleClass="flex justify-content-center align-items-center min-h-screen panel-tranparente">
-            <p:card styleClass="w-6 shadow-4 p-4">
-            <h:form>
-                <h3 class="text-center">Registro</h3>
-                <div class="field">
-                    <p:outputLabel for="nombre" value="Nombre"/>
-                    <p:inputText id="nombre" type="text" styleClass="w-full"/>
-                </div>
-                <div class="field">
-                    <p:outputLabel for="apellido" value="Apellido"/>
-                    <p:inputText id="apellido" type="text" styleClass="w-full"/>
-                </div>
-                <div class="field">
-                    <p:outputLabel for="nombre-usuario" value="Username"/>
-                    <p:inputText id="nombre-usuario" type="text" styleClass="w-full"/>
-                </div>
-                <div class="text-center mt-3">
-                    <p:commandButton value="Registrar" styleClass="p-button-success"/>
-                </div>
-            </h:form>
-        </p:card>
+
+        <div styleClass="flex justify-content-center align-items-center min-h-screen">
+            <p:card styleClass="w-6 shadow-4 p-4 panel-transparente">
+                <h:form>
+                    <h3 class="form-title">Registro</h3>
+                    <div class="grid">
+                        <!-- Primera columna (Nombre) -->
+                        <div class="col-6">
+                            <p:outputLabel for="nombre" value="Nombre" styleClass="text-form"/>
+                            <p:inputText id="nombre" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Segunda columna (Apellido) -->
+                        <div class="col-6">
+                            <p:outputLabel for="apellido" value="Apellido" styleClass="text-form"/>
+                            <p:inputText id="apellido" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Tercera columna (Nombre usuario) -->
+                        <div class="col-6">
+                            <p:outputLabel for="nombre-usuario" value="Nombre usuario" styleClass="text-form"/>
+                            <p:inputText id="nombre-usuario" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Cuarta columna (Dirección) -->
+                        <div class="col-6">
+                            <p:outputLabel for="direccion" value="Dirección" styleClass="text-form"/>
+                            <p:inputText id="direccion" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Quinto columna (Contraseña) -->
+                        <div class="col-6">
+                            <p:outputLabel for="password" value="Contraseña" styleClass="text-form"/>
+                            <p:password id="password" toggleMask="true" redisplay="true" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Sexta columna (Confirmar contraseña) -->
+                        <div class="col-6">
+                            <p:outputLabel for="password-confirmation" value="Confirmar contraseña" styleClass="text-form"/>
+                            <p:password id="password-confirmation" toggleMask="true" redisplay="true" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Séptima columna (Teléfono) -->
+                        <div class="col-6">
+                            <p:outputLabel for="telefono" value="Teléfono" styleClass="text-form"/>
+                            <p:inputText id="telefono" type="number" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Octava columna (Cédula) -->
+                        <div class="col-6">
+                            <p:outputLabel for="cedula" value="Cédula" styleClass="text-form"/>
+                            <p:inputText id="cedula" type="number" styleClass="w-full" />
+                        </div>
+            
+                        <!-- Novena columna (Rol) -->
+                        <div class="col-6">
+                            <p:outputLabel for="rol" value="Rol" styleClass="text-form"/>
+                            <p:selectOneMenu id="rol" required="true" styleClass="w-full">
+                                <f:selectItem itemLabel="Seleccione una opción" itemValue="" />
+                                <f:selectItem itemLabel="Agricultor" itemValue="Productor" />
+                                <f:selectItem itemLabel="Vendedor" itemValue="Vendedor" />
+                                <f:selectItem itemLabel="Comprador" itemValue="Comprador" />
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                    <!-- Boton de registrar al nuevo usuario -->
+                    <div class="text-center mt-3">
+                        <p:commandButton value="Registrar" styleClass="p-button-success"/>
+                    </div>
+                </h:form>
+            </p:card>
         </div>
     </h:body>
 </html>
