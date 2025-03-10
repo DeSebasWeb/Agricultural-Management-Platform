@@ -32,10 +32,6 @@ public class LoginControlador implements Serializable {
         this.usuario = usuario;
     }
 
-    public String redirigirIniciarSesion(){
-        return "iniciar-sesion.xhtml?faces-redirect=true";
-    }
-
     public String registrarUsuario(){
         Usuario usuarioConfirmacion = usuarioServicio.buscarUsuarioPorCedula(usuario.getCedula());
         if(usuarioConfirmacion != null){
@@ -48,6 +44,20 @@ public class LoginControlador implements Serializable {
             return "iniciar-sesion.xhtml?faces-redirect=true";
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error","No Se puede crear el usuario si no ha puesto los espacios requeridos"));
+        }
+        return null;
+    }
+
+    public String iniciarSesion(){
+        Usuario usuarioEncontrado = usuarioServicio.buscarUsuarioPorCorreo(usuario.getCorreo());
+        if (usuarioEncontrado!=null) {
+            if (usuarioEncontrado.getPassword().equals(usuario.getPassword())) {
+                return "home.xhtml?faces-redirect=true";
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "No corresponde la contraseña", "La contraseña que introduce no es la correcta"));
+            }
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "No existe el usuario", "El correo no esta registrado, registrelo y intentelo nuevamente"));
         }
         return null;
     }

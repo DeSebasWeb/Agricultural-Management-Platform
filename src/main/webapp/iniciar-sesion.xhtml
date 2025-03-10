@@ -1,16 +1,58 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <title>AgroMercado</title>
-        <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
-        <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon"/>
-        <h:outputStylesheet name="css/login.css?version=2"/>
-    </h:head>
+        <h:head>
+            <title>AgroMercado</title>
+            <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
+            <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon"/>
+            <h:outputStylesheet name="css/iniciar-sesion.css?version=2"/>
+        </h:head>
 
-    <h:body styleClass="bg-image">
-        <h3>Iniciar sesion</h3>
-    </h:body>
-</html>
+        <h:body styleClass="bg-image">
+            <div class="card">
+                <h:form id="menu">
+                    <p:growl id="mensajes" showDetails="true" life="3000"/>
+                    <!-- MenuBar -->
+                    <p:menubar hideDelay="1000" >
+                        <f:facet name="start">
+                            <p:graphicImage name="images/logo_transparente"/>
+                            <h:outputText value="AgroMercado" styleClass="text-lg flex align-items-center h-full px-3 menu-title"/>
+                        </f:facet>
+                        <f:facet name="end">
+                            <p:button value="Registro" icon="pi pi-user-plus" styleClass="ui-button-raised ui-button-secondary buttons-menu" outcome="login.xhtml?faces-redirect=true"/>
+                    </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+            <!-- class="flex justify-content-center align-items-center h-screen" -->
+            <div styleClass="flex grow-1 justify-content-center align-items-center form-center">
+                <p:card styleClass="w-6 shadow-4 panel-transparente">
+                    <h:form id="formulario-inicio-sesion">
+                        <h3 class="form-title">Iniciar Sesion</h3>
+                        <div class="field grid">
+                            <!-- Primera columna (Correo) -->
+                            <div class="col-12">
+                                <p:outputLabel for="correo" value="Correo electronico" styleClass="text-form"/>
+                            </div>
+                            <div class="col-12">
+                                <p:inputText id="correo" styleClass="w-full" value="#{loginControlador.usuario.correo}"/>
+                            </div>
+                        </div>
+                        <div class="field grid">
+                            <div class="col-12">
+                                <p:outputLabel for="password" value="Contraseña" styleClass="text-form"/>
+                            </div>
+                            <div class="col-12">
+                                <p:password id="password" toggleMask="true" redisplay="true" styleClass="w-full" value="#{loginControlador.usuario.password}"  required="true"/>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p:commandButton value="Iniciar sesion" styleClass="p-button-success" action="#{loginControlador.iniciarSesion}" process="@this formulario-inicio-sesion" update=":menu:mensajes"/>
+                        </div>
+                    </h:form>
+                </p:card>
+            </div>
+        </h:body>
+    </html>

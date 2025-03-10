@@ -11,7 +11,7 @@
     </h:head>
 
     <h:body styleClass="bg-image min-h-screen flex flex-column">
-        <div class="card">
+        <div class="card" styleClass="align-items-center">
             <h:form id="menu">
                 <p:growl id="mensajes" showDetails="true" life="3000"/>
                 <!-- MenuBar -->
@@ -22,81 +22,82 @@
                     </f:facet>
                         <!--  < class="flex align-items-center justify-content-center ">-->
                         <f:facet name="end">
-                        <p:button value="Iniciar sesion" icon="pi pi-sign-in" styleClass="ui-button-raised ui-button-secondary buttons-menu"/>
+                        <p:button value="Iniciar sesion" icon="pi pi-sign-in" styleClass="ui-button-raised ui-button-secondary buttons-menu" outcome="iniciar-sesion.xhtml?faces-redirect=true"/>
                    </f:facet>
                 </p:menubar>
             </h:form>
-        </div>
-        <div styleClass="flex grow-1 justify-content-center align-items-center form-center">
-            <p:card styleClass="w-6 shadow-4 p-4 panel-transparente">
-                <h:form id="formulario-registro">
-                    <h3 class="form-title">Registro</h3>
-                    <div class="grid">
-                        <!-- Primera columna (Nombre) -->
-                        <div class="col-6">
-                            <p:outputLabel for="nombre" value="Nombre" styleClass="text-form"/>
-                            <p:inputText id="nombre" styleClass="w-full" value="#{loginControlador.usuario.nombre}"/>
-                        </div>
             
-                        <!-- Segunda columna (Apellido) -->
-                        <div class="col-6">
-                            <p:outputLabel for="apellido" value="Apellido" styleClass="text-form"/>
-                            <p:inputText id="apellido" styleClass="w-full" value="#{loginControlador.usuario.apellido}"/>
+            <div styleClass="flex grow-1 justify-content-center align-items-center form-center">
+                <p:card styleClass="w-6 shadow-4 panel-transparente">
+                    <h:form id="formulario-registro">
+                        <h3 class="form-title">Registro</h3>
+                        <div class="grid">
+                            <!-- Primera columna (Nombre) -->
+                            <div class="col-6">
+                                <p:outputLabel for="nombre" value="Nombre" styleClass="text-form"/>
+                                <p:inputText id="nombre" styleClass="w-full" value="#{loginControlador.usuario.nombre}"/>
+                            </div>
+                
+                            <!-- Segunda columna (Apellido) -->
+                            <div class="col-6">
+                                <p:outputLabel for="apellido" value="Apellido" styleClass="text-form"/>
+                                <p:inputText id="apellido" styleClass="w-full" value="#{loginControlador.usuario.apellido}"/>
+                            </div>
+                
+                            <!-- Tercera columna (Nombre usuario) -->
+                            <div class="col-6">
+                                <p:outputLabel for="nombre-usuario" value="Nombre usuario" styleClass="text-form"/>
+                                <p:inputText id="nombre-usuario" styleClass="w-full" value="#{loginControlador.usuario.username}"  required="true"/>
+                            </div>
+                
+                            <!-- Cuarta columna (Correo) -->
+                            <div class="col-6">
+                                <p:outputLabel for="correo" value="Correo electronico" styleClass="text-form"/>
+                                <p:inputText id="correo" styleClass="w-full" value="#{loginControlador.usuario.correo}"/>
+                            </div>
+                
+                            <!-- Quinto columna (Contraseña) -->
+                            <div class="col-6">
+                                <p:outputLabel for="password" value="Contraseña" styleClass="text-form"/>
+                                <p:password id="password" toggleMask="true" redisplay="true" styleClass="w-full" value="#{loginControlador.usuario.password}"  required="true"/>
+                            </div>
+                
+                            <!-- Sexta columna (Confirmar contraseña) -->
+                            <div class="col-6">
+                                <p:outputLabel for="password-confirmation" value="Confirmar contraseña" styleClass="text-form"/>
+                                <p:password id="password-confirmation" toggleMask="true" redisplay="true" styleClass="w-full"/>
+                            </div>
+                
+                            <!-- Séptima columna (Teléfono) -->
+                            <div class="col-6">
+                                <p:outputLabel for="telefono" value="Teléfono" styleClass="text-form"/>
+                                <p:inputText id="telefono" type="number" styleClass="w-full" value="#{loginControlador.usuario.telefono}" required="true"/>
+                            </div>
+                
+                            <!-- Octava columna (Cédula) -->
+                            <div class="col-6">
+                                <p:outputLabel for="cedula" value="Cédula" styleClass="text-form"/>
+                                <p:inputText id="cedula" type="number" styleClass="w-full" value="#{loginControlador.usuario.cedula}" required="true"/>
+                            </div>
+                
+                            <!-- Novena columna (Rol) -->
+                            <div class="col-6">
+                                <p:outputLabel for="rol" value="Rol" styleClass="text-form"/>
+                                <p:selectOneMenu id="rol" required="true" styleClass="w-full" value="loginControlador.usuario.rol">
+                                    <f:selectItem itemLabel="Seleccione una opción" itemValue="" />
+                                    <f:selectItem itemLabel="Agricultor" itemValue="Productor" />
+                                    <f:selectItem itemLabel="Vendedor" itemValue="Vendedor" />
+                                    <f:selectItem itemLabel="Comprador" itemValue="Comprador" />
+                                </p:selectOneMenu>
+                            </div>
                         </div>
-            
-                        <!-- Tercera columna (Nombre usuario) -->
-                        <div class="col-6">
-                            <p:outputLabel for="nombre-usuario" value="Nombre usuario" styleClass="text-form"/>
-                            <p:inputText id="nombre-usuario" styleClass="w-full" value="#{loginControlador.usuario.username}"  required="true"/>
+                        <!-- Boton de registrar al nuevo usuario -->
+                        <div class="text-center mt-3">
+                            <p:commandButton value="Registrar" styleClass="p-button-success" action="#{loginControlador.registrarUsuario}" process="@this formulario-registro" update=":menu:mensajes"/>
                         </div>
-            
-                        <!-- Cuarta columna (Dirección) -->
-                        <div class="col-6">
-                            <p:outputLabel for="direccion" value="Dirección" styleClass="text-form"/>
-                            <p:inputText id="direccion" styleClass="w-full" value="#{loginControlador.usuario.direccion}"/>
-                        </div>
-            
-                        <!-- Quinto columna (Contraseña) -->
-                        <div class="col-6">
-                            <p:outputLabel for="password" value="Contraseña" styleClass="text-form"/>
-                            <p:password id="password" toggleMask="true" redisplay="true" styleClass="w-full" value="#{loginControlador.usuario.password}"  required="true"/>
-                        </div>
-            
-                        <!-- Sexta columna (Confirmar contraseña) -->
-                        <div class="col-6">
-                            <p:outputLabel for="password-confirmation" value="Confirmar contraseña" styleClass="text-form"/>
-                            <p:password id="password-confirmation" toggleMask="true" redisplay="true" styleClass="w-full"/>
-                        </div>
-            
-                        <!-- Séptima columna (Teléfono) -->
-                        <div class="col-6">
-                            <p:outputLabel for="telefono" value="Teléfono" styleClass="text-form"/>
-                            <p:inputText id="telefono" type="number" styleClass="w-full" value="#{loginControlador.usuario.telefono}" required="true"/>
-                        </div>
-            
-                        <!-- Octava columna (Cédula) -->
-                        <div class="col-6">
-                            <p:outputLabel for="cedula" value="Cédula" styleClass="text-form"/>
-                            <p:inputText id="cedula" type="number" styleClass="w-full" value="#{loginControlador.usuario.cedula}" required="true"/>
-                        </div>
-            
-                        <!-- Novena columna (Rol) -->
-                        <div class="col-6">
-                            <p:outputLabel for="rol" value="Rol" styleClass="text-form"/>
-                            <p:selectOneMenu id="rol" required="true" styleClass="w-full" value="loginControlador.usuario.rol">
-                                <f:selectItem itemLabel="Seleccione una opción" itemValue="" />
-                                <f:selectItem itemLabel="Agricultor" itemValue="Productor" />
-                                <f:selectItem itemLabel="Vendedor" itemValue="Vendedor" />
-                                <f:selectItem itemLabel="Comprador" itemValue="Comprador" />
-                            </p:selectOneMenu>
-                        </div>
-                    </div>
-                    <!-- Boton de registrar al nuevo usuario -->
-                    <div class="text-center mt-3">
-                        <p:commandButton value="Registrar" styleClass="p-button-success" action="#{loginControlador.registrarUsuario}" process="@this formulario-registro" update=":menu:mensajes"/>
-                    </div>
-                </h:form>
-            </p:card>
+                    </h:form>
+                </p:card>
+            </div>
         </div>
     </h:body>
 </html>
